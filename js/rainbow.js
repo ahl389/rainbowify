@@ -5,20 +5,20 @@ class Rainbow {
 		this.rainbowify();
 	}
 	
-    /** 
-     * Overrides default colors with the user's provided colors
-     * @param  {obj}     configSettings - An object with one property, an array of 
+  /** 
+   * Overrides default colors with the user's provided colors
+   * @param  {obj}     configSettings - An object with one property, an array of 
 	 * hex colors
-     */
+   */
 	config(configSettings) {
 		this.colors = configSettings.colors;
 		this.rainbowify();
 	}
 	
-    /** 
-     * Indentifies the HTML nodes to be colorized, and initializes the colorizing
+  /** 
+   * Indentifies the HTML nodes to be colorized, and initializes the colorizing
 	 * process for the each node
-     */
+   */
 	rainbowify() {
 		let textToRainbowify = document.querySelectorAll('.rainbow');
 
@@ -27,11 +27,11 @@ class Rainbow {
 		}
 	}
 	
-    /** 
-     * Processes each node by identifying any childnodes and sending them to be
+  /** 
+   * Processes each node by identifying any childnodes and sending them to be
 	 * colorized
-     * @param  {node}     node - the node to be processed
-     */
+   * @param  {node}     node - the node to be processed
+   */
 	processNode(node) {
 		for (let child of node.childNodes) {
 			
@@ -59,12 +59,11 @@ class Rainbow {
 		}
 	}
 	
-    /** 
-     * Applies correct color to passed node
-     * @param  {node}     node - the node to be colorized
-	 * @return {string}	  rainbowified - the string of colorized text to be inserted into 
-	 * the node's innerHTML
-     */
+  /** 
+   * Applies correct color to passed node
+   * @param  {node}     node - the node to be colorized
+	 * @return {string}	  rainbowified - the string of colorized text to be inserted into the node
+   */
 	applyColorStyles(node){
 		let rainbowified = '';
 
