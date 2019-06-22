@@ -8,7 +8,7 @@ class Rainbow {
   /** 
    * Overrides default colors with the user's provided colors
    * @param  {obj}     configSettings - An object with one property, an array of 
-	 * hex colors
+   * hex colors
    */
 	config(configSettings) {
 		this.colors = configSettings.colors;
@@ -17,7 +17,7 @@ class Rainbow {
 	
   /** 
    * Indentifies the HTML nodes to be colorized, and initializes the colorizing
-	 * process for the each node
+   * process for the each node
    */
 	rainbowify() {
 		let textToRainbowify = document.querySelectorAll('.rainbow');
@@ -29,7 +29,7 @@ class Rainbow {
 	
   /** 
    * Processes each node by identifying any childnodes and sending them to be
-	 * colorized
+   * colorized
    * @param  {node}     node - the node to be processed
    */
 	processNode(node) {
@@ -62,7 +62,7 @@ class Rainbow {
   /** 
    * Applies correct color to passed node
    * @param  {node}     node - the node to be colorized
-	 * @return {string}	  rainbowified - the string of colorized text to be inserted into the node
+   * @return {string}	  rainbowified - the string of colorized text to be inserted into the node
    */
 	applyColorStyles(node){
 		let rainbowified = '';
