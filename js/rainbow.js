@@ -11,7 +11,7 @@ class Rainbow {
 	}
 	
 	rainbowify() {
-		var textToRainbowify = document.querySelectorAll('.rainbow');
+		let textToRainbowify = document.querySelectorAll('.rainbow');
 
 		for (let node of textToRainbowify) {
 			this.processNode(node);
@@ -34,7 +34,7 @@ class Rainbow {
 				// HTML with appropriately styled text.
 				
 				if (node.nodeType === 3) { 
-					var replacementNode = document.createElement('span');
+					let replacementNode = document.createElement('span');
 					replacementNode.innerHTML = this.applyColorStyles(node);
 					node.parentNode.insertBefore(replacementNode, node);
 					node.parentNode.removeChild(node);
@@ -46,7 +46,7 @@ class Rainbow {
 	}
 	
 	applyColorStyles(node){
-		var rainbowified = '';
+		let rainbowified = '';
 
 		for (let char of node.textContent) {
 			
@@ -63,7 +63,7 @@ class Rainbow {
 				rainbowified += ' ';
 			} else {
 				rainbowified += `<span style = "color:${this.colors[this.colorIndex]}">${char}</span>`;
-				this.colorIndex = this.colorIndex == this.colors.length - 1 ? 0 : this.colorIndex + 1
+				this.colorIndex = this.colorIndex == this.colors.length - 1 ? 0 : this.colorIndex + 1;
 			}
 		}
 		
