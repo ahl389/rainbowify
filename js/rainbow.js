@@ -5,11 +5,20 @@ class Rainbow {
 		this.rainbowify();
 	}
 	
+    /** 
+     * Overrides default colors with the user's provided colors
+     * @param  {obj}     configSettings - An object with one property, an array of 
+	                     hex colors
+     */
 	config(configSettings) {
 		this.colors = configSettings.colors;
 		this.rainbowify();
 	}
 	
+    /** 
+     * Indentifies the HTML nodes to be colorized, and initializes the colorizing
+	   process for the each node
+     */
 	rainbowify() {
 		let textToRainbowify = document.querySelectorAll('.rainbow');
 
@@ -18,28 +27,33 @@ class Rainbow {
 		}
 	}
 	
-	processNode(rainbow) {
-		for (let node of rainbow.childNodes) {
+    /** 
+     * Processes each node by identifying any childnodes and sending them to be
+	 * colorized
+     * @param  {node}     node - the node to be processed
+     */
+	processNode(node) {
+		for (let child of node.childNodes) {
 			
-			// If the current node has child nodes, we must recursively process each
-			// child node until we've reached the deepest one so every part of the 
+			// If the current child node has child nodes, we must recursively process
+			// each child node until we've reached the deepest one so every part of the 
 			// text is appropriately colorized.
 			
-			if (node.childNodes.length > 0) {
-				this.processNode(node);
+			if (child.childNodes.length > 0) {
+				this.processNode(child);
 			} else {
 				
 				// If node is a text node, it won't be wrapped in any HTML tags, so we
 				// have to wrap it in a span tag in order to update the node's inner
 				// HTML with appropriately styled text.
 				
-				if (node.nodeType === 3) { 
+				if (child.nodeType === 3) { 
 					let replacementNode = document.createElement('span');
-					replacementNode.innerHTML = this.applyColorStyles(node);
-					node.parentNode.insertBefore(replacementNode, node);
-					node.parentNode.removeChild(node);
+					replacementNode.innerHTML = this.applyColorStyles(child);
+					child.parentNode.insertBefore(replacementNode, child);
+					child.parentNode.removeChild(child);
 				} else {
-					node.innerHTML = this.applyColorStyles(node);
+					child.innerHTML = this.applyColorStyles(child);
 				}
 			}
 		}
