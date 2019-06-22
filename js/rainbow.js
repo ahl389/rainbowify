@@ -112,11 +112,11 @@ class Rainbow {
     		// space inserted into the returned string at this position, otherwise we
     		// should apply the color style.
 		
-    		if (char == '') {
+    		if (char === '') {
     			rainbowified += ' ';
     		} else {
     			rainbowified += `<span style = "color:${this.colors[this.colorIndex]}">${char}</span>`;
-    			this.colorIndex = this.colorIndex == this.colors.length - 1 ? 0 : this.colorIndex + 1;
+    			this.colorIndex = this.colorIndex === this.colors.length - 1 ? 0 : this.colorIndex + 1;
     		}
     	}
 	
