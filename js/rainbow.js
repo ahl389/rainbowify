@@ -56,7 +56,7 @@ class Rainbow {
 					child.innerHTML = this.applyColorStyles(child);
 				}
 			}
-		}
+		}  
 	}
 	
   /** 
