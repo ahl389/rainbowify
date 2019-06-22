@@ -6,7 +6,7 @@ class Rainbow {
     }
 	
     /** 
-      * Overrides default colors with the user's provided colors
+     * Overrides default colors with the user's provided colors
      * @param  {obj}     configSettings - An object with one property, an array of 
      * hex colors
      */
