@@ -4,17 +4,15 @@ Turn all your HTML text into rainbows 🌈
 
 ### Install
 
-Easy peasy.
-
 Download the script and drop a link at the bottom of your HTML file.
 
 ```html
 <script src = "js/rainbow.js"></script>
 ```
 
-Add the class `rainbow` to any element whose contents you want to be written in rainbow!
+In your HTML, add the class `rainbow` to any element whose contents you want to be rendered in rainbow when the script executes. This script won't change the actual contents of your HTML file.
 
-That's it! Want to change the colors from the default?
+That's it! Want to use colors that differ from the default?
 
 Add some config info:
 
