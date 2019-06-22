@@ -7,12 +7,46 @@ class Rainbow {
 	
     /** 
      * Overrides default colors with the user's provided colors
-     * @param  {obj}     configSettings - An object with one property, an array of 
-     * hex colors
+     * @param  {obj}     configSettings - A user provided value that should be an object
      */
     config(configSettings) {
-    	this.colors = configSettings.colors;
-    	this.rainbowify();
+        if (this.validateConfig(configSettings)) {
+        	this.colors = configSettings.colors;
+        	this.rainbowify();
+        }
+    }
+    
+    /**
+     * Validates that config settings object exists, has property 'colors' and that the provided hex values are valid
+     * @param  {obj}    configSettings - An object with one property (colors), an array of hex colors
+     */
+    validateConfig(configSettings) {
+        if (configSettings) {
+            if (configSettings.hasOwnProperty('colors')) {
+                for (let color of configSettings.colors) {
+                    
+                    // this regex verifies that the provided color value is a hex code:
+                    // it should have 3 or 6 characters, preceded by a # symbol. The
+                    // valid letter range is A-F or a-f.
+                    
+                    const hexRegex = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+                    
+                    if (!hexRegex.test(color)) {
+                        console.warn(`${color} is an invalid hex code. Using defaults!`);
+                        return false;
+                    }
+                }
+            } else {
+                console.warn('Whoops, looks like there isn\'t a color property on the config settings object. Using defaults!');
+                return false;
+            }
+        } else {
+            console.warn('Whoops, looks like you forgot to pass the config settings object. Using defaults!');
+            return false;
+        }
+        
+        console.log('Custom Rainbowifying!')
+    	return true;
     }
 	
     /** 
