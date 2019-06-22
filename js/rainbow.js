@@ -1,54 +1,69 @@
 class Rainbow {	
-	constructor(colors) {
-		this.defaultColors = ['#e6194B', '#f58231', '#ffe119', '#3cb44b', '#4363d8', '#911eb4'];
-		this.colors = colors ? colors : this.defaultColors;
-		this.index = 0;
-		this.rainbowified();
+	constructor() {
+		this.colors = ['#e6194B', '#f58231', '#ffe119', '#3cb44b', '#4363d8', '#911eb4'];
+		this.colorIndex = 0;
+		this.rainbowify();
 	}
 	
-	config(config) {
-		this.colors = config.colors;
-		this.rainbowified();
+	config(configSettings) {
+		this.colors = configSettings.colors;
+		this.rainbowify();
 	}
 	
-	rainbowified() {
-		var rainbows = document.querySelectorAll('.rainbow');
+	rainbowify() {
+		var textToRainbowify = document.querySelectorAll('.rainbow');
 
-		for (let rainbow of rainbows) {
-			this.loop(rainbow)
+		for (let node of textToRainbowify) {
+			this.processNode(node);
 		}
 	}
 	
-	loop(rainbow) {
-		var paint = this.paint;
-		
+	processNode(rainbow) {
 		for (let node of rainbow.childNodes) {
+			
+			// If the current node has child nodes, we must recursively process each
+			// child node until we've reached the deepest one so every part of the 
+			// text is appropriately colorized.
+			
 			if (node.childNodes.length > 0) {
-				this.loop(node);
+				this.processNode(node);
 			} else {
+				
+				// If node is a text node, it won't be wrapped in any HTML tags, so we
+				// have to wrap it in a span tag in order to update the node's inner
+				// HTML with appropriately styled text.
+				
 				if (node.nodeType === 3) { 
 					var replacementNode = document.createElement('span');
-					replacementNode.innerHTML = this.paint(node);
+					replacementNode.innerHTML = this.applyColorStyles(node);
 					node.parentNode.insertBefore(replacementNode, node);
 					node.parentNode.removeChild(node);
 				} else {
-					node.innerHTML = this.paint(node);
+					node.innerHTML = this.applyColorStyles(node);
 				}
 			}
 		}
 	}
 	
-	paint(text){
+	applyColorStyles(node){
 		var rainbowified = '';
 
-		for (let letter of text.textContent) {
-			letter = letter.trim();
+		for (let char of node.textContent) {
 			
-			if (letter == '') {
+			// If the character has extra whitespace around it, like a line break, we
+			// remove it so the white space does not count as a character to be colorized.
+			
+			char = char.trim();
+			
+			// If the character is now an empty string, we realize there should be a single
+			// space inserted into the returned string at this position, otherwise we
+			// should apply the color style.
+			
+			if (char == '') {
 				rainbowified += ' ';
 			} else {
-				rainbowified += `<span style = "color:${this.colors[this.index]}">${letter}</span>`;
-				this.index = this.index == this.colors.length - 1 ? 0 : this.index + 1
+				rainbowified += `<span style = "color:${this.colors[this.colorIndex]}">${char}</span>`;
+				this.colorIndex = this.colorIndex == this.colors.length - 1 ? 0 : this.colorIndex + 1
 			}
 		}
 		
